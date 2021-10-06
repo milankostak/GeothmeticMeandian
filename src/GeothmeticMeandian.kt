@@ -33,12 +33,14 @@ fun main() {
     println(result)
 }
 
+/**
+ * Returns the median value of this list of doubles or Double.NaN if this list is empty.
+ */
 fun List<Double>.median(): Double {
     val size = this.size
-    return this.stream().mapToDouble { value -> value.toDouble() }
-            .sorted()
-            .skip(((size - 1) / 2).toLong())
-            .limit((2 - size % 2).toLong())
-            .average()
-            .orElse(Double.NaN)
+    return this
+        .sorted()
+        .drop((size - 1) / 2)
+        .take(2 - size % 2)
+        .average()
 }
